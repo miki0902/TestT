@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI フレームワーク研究アーカイブ</title>
+<meta name="description" content="arXivに公開され、トップカンファレンスで発表されたフレームワーク研究のアーカイブ。">
+<style>
+  :root {
+    --bg: #fbfaf8;
+    --panel: #ffffff;
+    --ink: #23211e;
+    --ink-soft: #5c5751;
+    --ink-faint: #8b857d;
+    --line: #e2ded7;
+    --accent: #3a5a78;
+    --accent-soft: #eef2f6;
+    --radius: 6px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", "Yu Gothic", sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+
+  header.site {
+    border-bottom: 1px solid var(--line);
+    background: var(--panel);
+    padding: 44px 0 36px;
+  }
+
+  header.site .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 12px;
+  }
+
+  header.site h1 {
+    margin: 0 0 12px;
+    font-size: 27px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  header.site p {
+    margin: 0;
+    max-width: 640px;
+    color: var(--ink-soft);
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  .meta-row b { font-size: 19px; font-weight: 600; color: var(--ink); margin-right: 6px; }
+
+  main { padding: 34px 0 80px; }
+
+  .layout { display: grid; grid-template-columns: 216px 1fr; gap: 34px; align-items: start; }
+
+  aside { position: sticky; top: 24px; }
+
+  .filter-block { margin-bottom: 26px; }
+
+  .filter-block h2 {
+    margin: 0 0 10px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 600;
+  }
+
+  .chip {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 4px 8px;
+    margin: 0 0 1px;
+    border-radius: var(--radius);
+    font: inherit;
+    font-size: 13px;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+
+  .chip:hover { background: var(--accent-soft); color: var(--ink); }
+
+  .chip.on { background: var(--accent); color: #fff; }
+
+  .chip .n { float: right; opacity: 0.6; font-size: 12px; }
+
+  .reset {
+    font-size: 12px;
+    color: var(--ink-faint);
+    background: none;
+    border: none;
+    padding: 2px 8px;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .searchbar { margin-bottom: 18px; }
+
+  .searchbar input {
+    width: 100%;
+    padding: 10px 13px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--panel);
+    font: inherit;
+    font-size: 14px;
+    color: var(--ink);
+  }
+
+  .searchbar input:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+
+  .result-count { font-size: 12px; color: var(--ink-faint); margin-bottom: 14px; }
+
+  article.paper {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+
+  .paper-head {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 16px 18px;
+    font: inherit;
+    cursor: pointer;
+    color: inherit;
+  }
+
+  .paper-head:hover { background: #fcfbfa; }
+
+  .paper-head h3 { margin: 0 0 5px; font-size: 15.5px; font-weight: 600; line-height: 1.5; }
+
+  .paper-head .lead { margin: 0 0 9px; color: var(--ink-soft); font-size: 13.5px; }
+
+  .badges { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 11.5px; }
+
+  .badge {
+    padding: 1px 8px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  .badge.venue { border-color: var(--accent); color: var(--accent); }
+
+  .badge.tag { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+
+  .paper-body { display: none; padding: 4px 18px 20px; border-top: 1px solid var(--line); }
+
+  .paper-body.open { display: block; }
+
+  .paper-body h4 {
+    margin: 18px 0 6px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 600;
+  }
+
+  .paper-body p { margin: 0 0 10px; }
+
+  .paper-body ul { margin: 0; padding-left: 1.2em; }
+
+  .paper-body li { margin-bottom: 4px; }
+
+  .body-meta { font-size: 13px; color: var(--ink-soft); margin-top: 16px; }
+
+  .links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 12px; font-size: 13px; }
+
+  .empty { padding: 40px 0; color: var(--ink-faint); text-align: center; }
+
+  footer.site {
+    border-top: 1px solid var(--line);
+    padding: 24px 0 50px;
+    font-size: 12.5px;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 820px) {
+    .layout { grid-template-columns: 1fr; }
+    aside { position: static; }
+    .filter-block { margin-bottom: 16px; }
+    .chip { display: inline-block; width: auto; margin-right: 4px; }
+    .chip .n { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <div class="eyebrow">Research Archive</div>
+    <h1>AI フレームワーク研究アーカイブ</h1>
+    <p>arXiv に公開され、かつトップカンファレンス群で発表された<strong>フレームワーク研究</strong>を収集し、分類したアーカイブです。所属や著者による制約は設けていません。</p>
+    <div class="meta-row">
+      <div><b id="stat-count">–</b>papers</div>
+      <div><b id="stat-venue">–</b>venues</div>
+      <div><b id="stat-tag">–</b>tags</div>
+      <div id="stat-updated"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap layout">
+    <aside>
+      <div class="filter-block">
+        <h2>検索</h2>
+        <div class="searchbar"><input id="q" type="search" placeholder="タイトル・要約・組織"></div>
+      </div>
+      <div class="filter-block">
+        <h2>タグ</h2>
+        <div id="tag-filters"></div>
+      </div>
+      <div class="filter-block">
+        <h2>学会</h2>
+        <div id="venue-filters"></div>
+      </div>
+      <button class="reset" id="reset">絞り込みをリセット</button>
+    </aside>
+
+    <section>
+      <div class="result-count" id="count"></div>
+      <div id="list"></div>
+    </section>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <a href="https://github.com/miki0902/TestT">GitHub リポジトリ</a> ・
+    データは <code>papers/</code> 配下の Markdown から <code>tools/build_site.py</code> で生成しています。
+  </div>
+</footer>
+
+<script>
+const state = { q: "", tags: new Set(), venues: new Set() };
+let DATA = { papers: [], tags: [] };
+
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) =>
+  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+function counts(key) {
+  const map = new Map();
+  for (const p of DATA.papers) {
+    const values = key === "tags" ? p.tags : [p.venue];
+    for (const v of values) map.set(v, (map.get(v) || 0) + 1);
+  }
+  return map;
+}
+
+function buildFilters(containerId, values, set) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = "";
+  for (const [value, n] of values) {
+    const btn = document.createElement("button");
+    btn.className = "chip" + (set.has(value) ? " on" : "");
+    btn.innerHTML = esc(value) + '<span class="n">' + n + "</span>";
+    btn.onclick = () => {
+      set.has(value) ? set.delete(value) : set.add(value);
+      render();
+    };
+    el.appendChild(btn);
+  }
+}
+
+function matches(p) {
+  if (state.tags.size && !p.tags.some((t) => state.tags.has(t))) return false;
+  if (state.venues.size && !state.venues.has(p.venue)) return false;
+  if (state.q) {
+    const hay = [p.title_ja, p.title_en, p.summary_line, p.authors_org, p.venue,
+                 p.tags.join(" "), p.summary["課題"], p.summary["手法"], p.summary["成果"]]
+                 .join(" ").toLowerCase();
+    if (!hay.includes(state.q.toLowerCase())) return false;
+  }
+  return true;
+}
+
+function paperNode(p) {
+  const art = document.createElement("article");
+  art.className = "paper";
+
+  const tags = p.tags.map((t) => '<span class="badge tag">' + esc(t) + "</span>").join("");
+  const links = [
+    p.arxiv_url ? '<a href="' + esc(p.arxiv_url) + '" target="_blank" rel="noopener">arXiv ↗</a>' : "",
+    p.code_url ? '<a href="' + esc(p.code_url) + '" target="_blank" rel="noopener">GitHub ↗</a>' : "",
+    p.project_url ? '<a href="' + esc(p.project_url) + '" target="_blank" rel="noopener">プロジェクト ↗</a>' : "",
+    '<a href="https://github.com/miki0902/TestT/blob/main/' + esc(p.path) + '" target="_blank" rel="noopener">Markdown ↗</a>',
+  ].filter(Boolean).join("");
+
+  const points = p.points.map((x) => "<li>" + esc(x) + "</li>").join("");
+
+  art.innerHTML =
+    '<button class="paper-head">' +
+      "<h3>" + esc(p.title_ja) + "</h3>" +
+      '<p class="lead">' + esc(p.summary_line) + "</p>" +
+      '<div class="badges">' +
+        '<span class="badge venue">' + esc(p.venue) + "</span>" +
+        '<span class="badge">' + esc(p.venue_type) + "</span>" +
+        '<span class="badge">' + esc(p.authors_org) + "</span>" +
+        tags +
+      "</div>" +
+    "</button>" +
+    '<div class="paper-body">' +
+      "<h4>課題</h4><p>" + esc(p.summary["課題"]) + "</p>" +
+      "<h4>手法</h4><p>" + esc(p.summary["手法"]) + "</p>" +
+      "<h4>成果</h4><p>" + esc(p.summary["成果"]) + "</p>" +
+      (points ? "<h4>ポイント</h4><ul>" + points + "</ul>" : "") +
+      '<div class="body-meta">' + esc(p.title_en) + "</div>" +
+      '<div class="links">' + links + "</div>" +
+    "</div>";
+
+  const head = art.querySelector(".paper-head");
+  const body = art.querySelector(".paper-body");
+  head.onclick = () => body.classList.toggle("open");
+  return art;
+}
+
+function render() {
+  buildFilters("tag-filters", [...counts("tags")].sort((a, b) => b[1] - a[1]), state.tags);
+  buildFilters("venue-filters", [...counts("venue")].sort((a, b) => b[1] - a[1]), state.venues);
+
+  const list = document.getElementById("list");
+  const shown = DATA.papers.filter(matches);
+  list.innerHTML = "";
+  if (!shown.length) {
+    list.innerHTML = '<div class="empty">条件に合う論文がありません。</div>';
+  } else {
+    for (const p of shown) list.appendChild(paperNode(p));
+  }
+  document.getElementById("count").textContent = shown.length + " / " + DATA.papers.length + " 件を表示";
+}
+
+fetch("papers.json")
+  .then((r) => r.json())
+  .then((data) => {
+    DATA = data;
+    document.getElementById("stat-count").textContent = data.count;
+    document.getElementById("stat-venue").textContent = new Set(data.papers.map((p) => p.venue)).size;
+    document.getElementById("stat-tag").textContent = new Set(data.papers.flatMap((p) => p.tags)).size;
+    document.getElementById("stat-updated").textContent = "最終更新 " + data.generated_at;
+    render();
+  })
+  .catch(() => {
+    document.getElementById("list").innerHTML =
+      '<div class="empty">papers.json を読み込めませんでした。<br>ローカルで確認する場合は <code>python3 -m http.server</code> 経由で開いてください。</div>';
+  });
+
+document.getElementById("q").addEventListener("input", (e) => {
+  state.q = e.target.value.trim();
+  render();
+});
+
+document.getElementById("reset").onclick = () => {
+  state.q = "";
+  state.tags.clear();
+  state.venues.clear();
+  document.getElementById("q").value = "";
+  render();
+};
+</script>
+
+</body>
+</html>
