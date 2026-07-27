@@ -2,6 +2,8 @@
 
 arXiv に公開され、かつトップカンファレンス群で発表された **フレームワーク研究** を収集・分類したアーカイブです。
 
+**公開サイト: https://miki0902.github.io/TestT/**
+
 ## 収録条件
 
 以下の3条件をすべて満たす研究を対象とします。
@@ -40,11 +42,26 @@ NeurIPS / ICML / ICLR / CVPR / ICCV / ECCV / ACL / EMNLP / NAACL / AAAI / IJCAI 
 ```
 .
 ├── README.md          # 本ファイル（運用ルールとタグ定義）
-├── INDEX.md           # 全収録論文の一覧表（追加のたびに更新）
-└── papers/
-    └── <年>/
-        └── <arxiv_id>-<slug>.md
+├── INDEX.md           # 全収録論文の一覧表（自動生成・手で編集しない）
+├── papers/
+│   └── <年>/
+│       └── <arxiv_id>-<slug>.md   # 正となるデータ
+├── docs/              # GitHub Pages で公開される静的サイト
+│   ├── index.html     # 検索・タグ絞り込み付きの一覧
+│   └── papers.json    # 自動生成・手で編集しない
+└── tools/
+    └── build_site.py  # papers/ から INDEX.md と docs/papers.json を生成
 ```
+
+### 更新手順
+
+論文ファイルを追加・編集したら、リポジトリのルートで以下を実行する。
+
+```
+python3 tools/build_site.py
+```
+
+`INDEX.md` と `docs/papers.json` が再生成される。スクリプトは frontmatter のキー欠落・未定義タグ・`arxiv_id` の重複を検出して警告する。push すると GitHub Pages に反映される。
 
 ## 論文ファイルの書式
 
