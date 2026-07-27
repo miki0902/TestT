@@ -16,8 +16,8 @@
 | タイトル（日本語） | 一行要約 | 年 | 形式 | タグ | リンク |
 |---|---|---|---|---|---|
 | LLMは多ターン会話で道に迷う | 指示を小分けにして渡すと、あらゆるLLMの性能が平均39%落ちることを示した | 2026 | 本会議 | 評価・解析フレームワーク | [md](papers/2026/2505.06120-llms-get-lost-in-multi-turn-conversation.md) ・ [arXiv](https://arxiv.org/abs/2505.06120) |
-| The Polar Express: 最適な行列符号関数法とMuonアルゴリズムへの応用 | Muon最適化器の中核計算を近似理論で最適化し、学習の収束を改善した | 2026 | 本会議 | 学習・最適化手法 / モデル圧縮・効率化 | [md](papers/2026/2505.16932-polar-express.md) ・ [arXiv](https://arxiv.org/abs/2505.16932) |
-| Transformerは本質的に簡潔である | 同じ概念をどれだけ短く書けるかという尺度で、Transformerの強さを説明した | 2026 | 本会議 | アーキテクチャ提案 / 評価・解析フレームワーク | [md](papers/2026/2510.19315-transformers-are-inherently-succinct.md) ・ [arXiv](https://arxiv.org/abs/2510.19315) |
+| The Polar Express: 最適な行列符号関数法とMuonアルゴリズムへの応用 | Muon最適化器の中核計算を近似理論で最適化し、学習の収束を改善した | 2026 | 本会議 | 理論研究 / 学習・最適化手法 / モデル圧縮・効率化 | [md](papers/2026/2505.16932-polar-express.md) ・ [arXiv](https://arxiv.org/abs/2505.16932) |
+| Transformerは本質的に簡潔である | 同じ概念をどれだけ短く書けるかという尺度で、Transformerの強さを説明した | 2026 | 本会議 | 理論研究 / アーキテクチャ提案 / 評価・解析フレームワーク | [md](papers/2026/2510.19315-transformers-are-inherently-succinct.md) ・ [arXiv](https://arxiv.org/abs/2510.19315) |
 
 ## ACL 2025
 
@@ -148,10 +148,10 @@
 | GaLore: 勾配の低ランク射影によるメモリ効率的なLLM学習 | 勾配を圧縮して保持し、24GBのGPU 1枚で7Bモデルの事前学習を可能にした | 2024 | 本会議 | 学習・最適化手法 / モデル圧縮・効率化 | [md](papers/2024/2403.03507-galore.md) ・ [arXiv](https://arxiv.org/abs/2403.03507) |
 | Genie: 生成的な対話環境 | ラベルのない動画だけから、操作できる仮想世界を生成するモデルを学習した | 2024 | 本会議 | 世界モデル・具現化AI / 基盤モデル / マルチモーダル・生成 | [md](papers/2024/2402.15391-genie.md) ・ [arXiv](https://arxiv.org/abs/2402.15391) |
 | HarmBench: 自動レッドチーミングと頑健な拒否のための標準評価基盤 | 攻撃18手法と防御33対象を同一条件で比較できる、安全性評価の共通基盤 | 2024 | 本会議 | 安全性・アラインメント / 評価・解析フレームワーク | [md](papers/2024/2402.04249-harmbench.md) ・ [arXiv](https://arxiv.org/abs/2402.04249) |
-| TransformerはSSMである: 構造化状態空間双対性による一般化モデルと効率的アルゴリズム | TransformerとMambaが数学的に同じ枠組みだと示し、2〜8倍速いMamba-2を導いた | 2024 | 本会議 | アーキテクチャ提案 / モデル圧縮・効率化 | [md](papers/2024/2405.21060-mamba-2.md) ・ [arXiv](https://arxiv.org/abs/2405.21060) |
+| TransformerはSSMである: 構造化状態空間双対性による一般化モデルと効率的アルゴリズム | TransformerとMambaが数学的に同じ枠組みだと示し、2〜8倍速いMamba-2を導いた | 2024 | 本会議 | 理論研究 / アーキテクチャ提案 / モデル圧縮・効率化 | [md](papers/2024/2405.21060-mamba-2.md) ・ [arXiv](https://arxiv.org/abs/2405.21060) |
 | Vision Mamba: 双方向状態空間モデルによる効率的な視覚表現学習 | Transformerに代わる状態空間モデルを画像に適用し、高解像度処理を大幅に軽くした | 2024 | 本会議 | アーキテクチャ提案 / モデル圧縮・効率化 | [md](papers/2024/2401.09417-vision-mamba.md) ・ [arXiv](https://arxiv.org/abs/2401.09417) |
 | より説得力のあるLLM同士の討論は、より真実に近い答えを導く | モデル同士に討論させることで、知識のない審判でも正答を見分けられるようにした | 2024 | 本会議 | 安全性・アラインメント / 推論時フレームワーク / 評価・解析フレームワーク | [md](papers/2024/2402.06782-debating-with-persuasive-llms.md) ・ [arXiv](https://arxiv.org/abs/2402.06782) |
-| データ分布の比の推定による離散拡散モデリング | 拡散モデルを文章生成に持ち込む理論を整え、GPT-2を上回る性能を示した | 2024 | 本会議 | アーキテクチャ提案 / 学習・最適化手法 / マルチモーダル・生成 | [md](papers/2024/2310.16834-score-entropy-discrete-diffusion.md) ・ [arXiv](https://arxiv.org/abs/2310.16834) |
+| データ分布の比の推定による離散拡散モデリング | 拡散モデルを文章生成に持ち込む理論を整え、GPT-2を上回る性能を示した | 2024 | 本会議 | 理論研究 / アーキテクチャ提案 / 学習・最適化手法 | [md](papers/2024/2310.16834-score-entropy-discrete-diffusion.md) ・ [arXiv](https://arxiv.org/abs/2310.16834) |
 | 弱から強への汎化: 弱い監督で強い能力を引き出す | 弱いモデルが付けた誤りを含むラベルでも、強いモデルは教師を超えて学べる | 2024 | 本会議 | 安全性・アラインメント / 学習・最適化手法 | [md](papers/2024/2312.09390-weak-to-strong-generalization.md) ・ [arXiv](https://arxiv.org/abs/2312.09390) |
 
 ## NeurIPS 2024
@@ -174,7 +174,7 @@
 | サーキットブレーカーによるアラインメントと頑健性の改善 | 有害な出力に向かう内部表現を検出して生成を遮断し、未知の攻撃にも耐える | 2024 | 本会議 | 安全性・アラインメント / アーキテクチャ提案 | [md](papers/2024/2406.04313-circuit-breakers.md) ・ [arXiv](https://arxiv.org/abs/2406.04313) |
 | 出来の悪い自分自身で拡散モデルを導く | 出来の悪い自分自身を案内役に使い、画像生成の品質と多様性を両立させた | 2024 | 本会議 | 推論時フレームワーク / マルチモーダル・生成 | [md](papers/2024/2406.02507-autoguidance.md) ・ [arXiv](https://arxiv.org/abs/2406.02507) |
 | 画像は32トークンあれば再構成も生成もできる | 画像を32個のトークンに圧縮し、生成を数百倍高速化しつつ品質を維持 | 2024 | 本会議 | アーキテクチャ提案 / マルチモーダル・生成 / モデル圧縮・効率化 | [md](papers/2024/2406.07550-titok.md) ・ [arXiv](https://arxiv.org/abs/2406.07550) |
-| 確率的テイラー微分推定器: 任意の微分作用素に対する効率的な償却 | 高次微分を含む学習を高速化し、物理法則を学ぶニューラルネットを実用速度に | 2024 | 本会議 | 学習・最適化手法 / コード・科学応用 | [md](papers/2024/2412.00088-stochastic-taylor-derivative-estimator.md) ・ [arXiv](https://arxiv.org/abs/2412.00088) |
+| 確率的テイラー微分推定器: 任意の微分作用素に対する効率的な償却 | 高次微分を含む学習を高速化し、物理法則を学ぶニューラルネットを実用速度に | 2024 | 本会議 | 理論研究 / 学習・最適化手法 / コード・科学応用 | [md](papers/2024/2412.00088-stochastic-taylor-derivative-estimator.md) ・ [arXiv](https://arxiv.org/abs/2412.00088) |
 
 ## NeurIPS 2024 Datasets and Benchmarks Track
 

@@ -304,26 +304,11 @@
 
 <script>
 const state = { q: "", tags: new Set(), venues: new Set() };
-let DATA = { papers: [], tags: [] };
+let DATA = { papers: [], tags: [], tag_colors: {} };
 
-// タグごとの配色 [バッジ背景, 文字色 / ストライプ色]
-const TAG_COLORS = {
-  "アーキテクチャ提案":         ["#d6e6ff", "#0b63e5"],
-  "学習・最適化手法":           ["#d2f5da", "#00963f"],
-  "モデル圧縮・効率化":         ["#ffeec2", "#c47800"],
-  "データ構築・フィルタリング": ["#c6f5ec", "#009486"],
-  "推論時フレームワーク":       ["#e6d9ff", "#7326ee"],
-  "検索拡張・記憶":             ["#ffd9ea", "#e0116e"],
-  "評価・解析フレームワーク":   ["#dae4f0", "#3d6a99"],
-  "基盤モデル":                 ["#dcdcff", "#3a34e0"],
-  "世界モデル・具現化AI":       ["#e6f7ae", "#6ba300"],
-  "マルチモーダル・生成":       ["#ffdec4", "#f26100"],
-  "コード・科学応用":           ["#c9edff", "#0092d6"],
-  "安全性・アラインメント":     ["#ffd9d1", "#ec3214"],
-};
-
+// タグごとの配色は papers.json（tools/build_site.py の TAGS が正）から読み込む
 const FALLBACK = ["#eeeeee", "#666666"];
-const colorOf = (tag) => TAG_COLORS[tag] || FALLBACK;
+const colorOf = (tag) => (DATA.tag_colors && DATA.tag_colors[tag]) || FALLBACK;
 
 /** 帯をタグの数だけ等分し、各区画に対応する色を割り当てる。 */
 function stripeGradient(tags) {
