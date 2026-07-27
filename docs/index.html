@@ -140,11 +140,22 @@
   .result-count { font-size: 12px; color: var(--ink-faint); margin-bottom: 14px; }
 
   article.paper {
+    position: relative;
     background: var(--panel);
     border: 1px solid var(--line);
     border-radius: var(--radius);
     margin-bottom: 10px;
     overflow: hidden;
+    padding-left: 8px;
+  }
+
+  /* 付与タグの色を斜めストライプで重ねる */
+  .paper .stripe {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 8px;
   }
 
   .paper-head {
@@ -177,7 +188,18 @@
 
   .badge.venue { border-color: var(--accent); color: var(--accent); }
 
-  .badge.tag { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+  .badge.tag { border-color: transparent; }
+
+  .chip .swatch {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    margin-right: 7px;
+    vertical-align: 1px;
+  }
+
+  .chip.on .swatch { outline: 1px solid rgba(255, 255, 255, 0.75); }
 
   .paper-body { display: none; padding: 4px 18px 20px; border-top: 1px solid var(--line); }
 
@@ -272,6 +294,34 @@
 const state = { q: "", tags: new Set(), venues: new Set() };
 let DATA = { papers: [], tags: [] };
 
+// タグごとの配色 [バッジ背景, 文字色 / ストライプ色]
+const TAG_COLORS = {
+  "アーキテクチャ提案":         ["#eaf0f7", "#34567d"],
+  "学習・最適化手法":           ["#e8f2ea", "#3a6a48"],
+  "モデル圧縮・効率化":         ["#f7f0e2", "#8a6222"],
+  "データ構築・フィルタリング": ["#e4f1ef", "#2b6560"],
+  "推論時フレームワーク":       ["#f0ecf8", "#574486"],
+  "検索拡張・記憶":             ["#f9ecef", "#8a3f54"],
+  "評価・解析フレームワーク":   ["#ecedef", "#495460"],
+  "基盤モデル":                 ["#e9ebf9", "#3d4788"],
+  "世界モデル・具現化AI":       ["#f0f3e5", "#5a6a2e"],
+  "マルチモーダル・生成":       ["#fbeee6", "#8d4f2c"],
+  "コード・科学応用":           ["#e5f1f8", "#256081"],
+  "安全性・アラインメント":     ["#f9ebe8", "#8c4235"],
+};
+
+const FALLBACK = ["#eeeeee", "#666666"];
+const colorOf = (tag) => TAG_COLORS[tag] || FALLBACK;
+
+/** 付与タグの色を45度の帯として繰り返すグラデーションを組み立てる。 */
+function stripeGradient(tags) {
+  const colors = (tags.length ? tags : ["_"]).map((t) => colorOf(t)[1]);
+  if (colors.length === 1) return colors[0];
+  const band = 9;
+  const stops = colors.map((c, i) => `${c} ${i * band}px ${(i + 1) * band}px`);
+  return `repeating-linear-gradient(135deg, ${stops.join(", ")})`;
+}
+
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) =>
   ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
@@ -287,10 +337,14 @@ function counts(key) {
 function buildFilters(containerId, values, set) {
   const el = document.getElementById(containerId);
   el.innerHTML = "";
+  const withSwatch = containerId === "tag-filters";
   for (const [value, n] of values) {
     const btn = document.createElement("button");
     btn.className = "chip" + (set.has(value) ? " on" : "");
-    btn.innerHTML = esc(value) + '<span class="n">' + n + "</span>";
+    const swatch = withSwatch
+      ? '<span class="swatch" style="background:' + colorOf(value)[1] + '"></span>'
+      : "";
+    btn.innerHTML = swatch + esc(value) + '<span class="n">' + n + "</span>";
     btn.onclick = () => {
       set.has(value) ? set.delete(value) : set.add(value);
       render();
@@ -315,7 +369,10 @@ function paperNode(p) {
   const art = document.createElement("article");
   art.className = "paper";
 
-  const tags = p.tags.map((t) => '<span class="badge tag">' + esc(t) + "</span>").join("");
+  const tags = p.tags.map((t) => {
+    const [bg, fg] = colorOf(t);
+    return '<span class="badge tag" style="background:' + bg + ";color:" + fg + '">' + esc(t) + "</span>";
+  }).join("");
   const links = [
     p.arxiv_url ? '<a href="' + esc(p.arxiv_url) + '" target="_blank" rel="noopener">arXiv ↗</a>' : "",
     p.code_url ? '<a href="' + esc(p.code_url) + '" target="_blank" rel="noopener">GitHub ↗</a>' : "",
@@ -326,6 +383,7 @@ function paperNode(p) {
   const points = p.points.map((x) => "<li>" + esc(x) + "</li>").join("");
 
   art.innerHTML =
+    '<div class="stripe" style="background:' + stripeGradient(p.tags) + '"></div>' +
     '<button class="paper-head">' +
       "<h3>" + esc(p.title_ja) + "</h3>" +
       '<p class="lead">' + esc(p.summary_line) + "</p>" +
