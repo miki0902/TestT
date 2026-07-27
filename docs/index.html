@@ -308,30 +308,31 @@ let DATA = { papers: [], tags: [] };
 
 // タグごとの配色 [バッジ背景, 文字色 / ストライプ色]
 const TAG_COLORS = {
-  "アーキテクチャ提案":         ["#dbe8fb", "#1667c8"],
-  "学習・最適化手法":           ["#d8f0dc", "#12873f"],
-  "モデル圧縮・効率化":         ["#fdeac4", "#b06d00"],
-  "データ構築・フィルタリング": ["#cdf0e9", "#00857a"],
-  "推論時フレームワーク":       ["#e7ddfc", "#6c33d6"],
-  "検索拡張・記憶":             ["#fddce7", "#c81f63"],
-  "評価・解析フレームワーク":   ["#dee6ef", "#41627f"],
-  "基盤モデル":                 ["#dde0fc", "#3a3fc4"],
-  "世界モデル・具現化AI":       ["#e6f4bf", "#5f8a00"],
-  "マルチモーダル・生成":       ["#ffe2cd", "#d95a00"],
-  "コード・科学応用":           ["#cfecfb", "#0080b8"],
-  "安全性・アラインメント":     ["#fdddd6", "#d93a1e"],
+  "アーキテクチャ提案":         ["#d6e6ff", "#0b63e5"],
+  "学習・最適化手法":           ["#d2f5da", "#00963f"],
+  "モデル圧縮・効率化":         ["#ffeec2", "#c47800"],
+  "データ構築・フィルタリング": ["#c6f5ec", "#009486"],
+  "推論時フレームワーク":       ["#e6d9ff", "#7326ee"],
+  "検索拡張・記憶":             ["#ffd9ea", "#e0116e"],
+  "評価・解析フレームワーク":   ["#dae4f0", "#3d6a99"],
+  "基盤モデル":                 ["#dcdcff", "#3a34e0"],
+  "世界モデル・具現化AI":       ["#e6f7ae", "#6ba300"],
+  "マルチモーダル・生成":       ["#ffdec4", "#f26100"],
+  "コード・科学応用":           ["#c9edff", "#0092d6"],
+  "安全性・アラインメント":     ["#ffd9d1", "#ec3214"],
 };
 
 const FALLBACK = ["#eeeeee", "#666666"];
 const colorOf = (tag) => TAG_COLORS[tag] || FALLBACK;
 
-/** 付与タグの色を45度の帯として繰り返すグラデーションを組み立てる。 */
+/** 帯をタグの数だけ等分し、各区画に対応する色を割り当てる。 */
 function stripeGradient(tags) {
   const colors = (tags.length ? tags : ["_"]).map((t) => colorOf(t)[1]);
   if (colors.length === 1) return colors[0];
-  const band = 9;
-  const stops = colors.map((c, i) => `${c} ${i * band}px ${(i + 1) * band}px`);
-  return `repeating-linear-gradient(135deg, ${stops.join(", ")})`;
+  const step = 100 / colors.length;
+  const pct = (n) => Number((n * step).toFixed(4)) + "%";
+  const stops = colors.map((c, i) => `${c} ${pct(i)} ${pct(i + 1)}`);
+  return `linear-gradient(135deg, ${stops.join(", ")})`;
 }
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) =>
