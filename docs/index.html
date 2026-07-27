@@ -424,7 +424,7 @@ function render() {
   document.getElementById("count").textContent = shown.length + " / " + DATA.papers.length + " 件を表示";
 }
 
-fetch("papers.json")
+fetch("papers.json?t=" + Date.now(), { cache: "no-store" })
   .then((r) => r.json())
   .then((data) => {
     DATA = data;
