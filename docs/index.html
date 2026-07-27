@@ -78,7 +78,19 @@
 
   .layout { display: grid; grid-template-columns: 216px 1fr; gap: 34px; align-items: start; }
 
-  aside { position: sticky; top: 24px; }
+  /* 左サイドバーは独立してスクロールし、リストの長さに影響されない */
+  aside {
+    position: sticky;
+    top: 16px;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 8px;
+  }
+
+  aside::-webkit-scrollbar { width: 6px; }
+  aside::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+  aside::-webkit-scrollbar-track { background: transparent; }
 
   .filter-block { margin-bottom: 26px; }
 
@@ -235,7 +247,7 @@
 
   @media (max-width: 820px) {
     .layout { grid-template-columns: 1fr; }
-    aside { position: static; }
+    aside { position: static; max-height: none; overflow-y: visible; padding-right: 0; }
     .filter-block { margin-bottom: 16px; }
     .chip { display: inline-block; width: auto; margin-right: 4px; }
     .chip .n { display: none; }
