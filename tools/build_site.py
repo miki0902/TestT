@@ -19,6 +19,11 @@ PAPERS_DIR = ROOT / "papers"
 DOCS_DIR = ROOT / "docs"
 INDEX_MD = ROOT / "INDEX.md"
 
+# 公開サイトのURL（INDEX.md の冒頭に載る。リポジトリ名を変えたらここも直す）
+# 空文字にすると INDEX.md にURL行を出力しない。
+# 注意: 公開サイト側（docs/index.html）にはリポジトリへのリンクを置かない方針。
+SITE_URL = "https://miki0902.github.io/TestT/"
+
 # ---------------------------------------------------------------------------
 # タグ定義（このリポジトリで唯一の正）
 #
@@ -203,9 +208,9 @@ def write_index(papers: list[dict]) -> None:
         "",
         f"収録件数: {len(papers)} 件 / 最終更新: {date.today().isoformat()}",
         "",
-        "公開サイト: https://miki0902.github.io/TestT/",
-        "",
     ]
+    if SITE_URL:
+        lines += [f"公開サイト: {SITE_URL}", ""]
 
     current_venue = None
     for paper in papers:

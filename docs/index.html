@@ -297,8 +297,7 @@
 
 <footer class="site">
   <div class="wrap">
-    <a href="https://github.com/miki0902/TestT">GitHub リポジトリ</a> ・
-    データは <code>papers/</code> 配下の Markdown から <code>tools/build_site.py</code> で生成しています。
+    arXiv に公開され、トップカンファレンス群で発表されたフレームワーク研究のアーカイブ。<span id="footer-count"></span>
   </div>
 </footer>
 
@@ -375,7 +374,6 @@ function paperNode(p) {
     p.arxiv_url ? '<a href="' + esc(p.arxiv_url) + '" target="_blank" rel="noopener">arXiv ↗</a>' : "",
     p.code_url ? '<a href="' + esc(p.code_url) + '" target="_blank" rel="noopener">GitHub ↗</a>' : "",
     p.project_url ? '<a href="' + esc(p.project_url) + '" target="_blank" rel="noopener">プロジェクト ↗</a>' : "",
-    '<a href="https://github.com/miki0902/TestT/blob/main/' + esc(p.path) + '" target="_blank" rel="noopener">Markdown ↗</a>',
   ].filter(Boolean).join("");
 
   const points = p.points.map((x) => "<li>" + esc(x) + "</li>").join("");
@@ -430,6 +428,8 @@ fetch("papers.json?t=" + Date.now(), { cache: "no-store" })
     document.getElementById("stat-venue").textContent = new Set(data.papers.map((p) => p.venue)).size;
     document.getElementById("stat-tag").textContent = new Set(data.papers.flatMap((p) => p.tags)).size;
     document.getElementById("stat-updated").textContent = "最終更新 " + data.generated_at;
+    document.getElementById("footer-count").textContent =
+      "収録 " + data.count + " 件 / 最終更新 " + data.generated_at;
     render();
   })
   .catch(() => {
