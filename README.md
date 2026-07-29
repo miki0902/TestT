@@ -2,7 +2,7 @@
 
 arXiv に公開され、かつトップカンファレンス群で発表された **フレームワーク研究** を収集・分類したアーカイブです。
 
-**公開サイト: https://miki0902.github.io/TestT/**
+**公開サイト: https://miki0902.github.io/arxiv-framework-papers/**
 
 > 公開サイトにはリポジトリへのリンクを置かない方針です。リポジトリ名を変更したら、`tools/build_site.py` の `SITE_URL` と上記のURLを更新してください。
 

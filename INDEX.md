@@ -2,7 +2,7 @@
 
 収録件数: 103 件 / 最終更新: 2026-07-29
 
-公開サイト: https://miki0902.github.io/TestT/
+公開サイト: https://miki0902.github.io/arxiv-framework-papers/
 
 ## CVPR 2026
 

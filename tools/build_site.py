@@ -22,7 +22,7 @@ INDEX_MD = ROOT / "INDEX.md"
 # 公開サイトのURL（INDEX.md の冒頭に載る。リポジトリ名を変えたらここも直す）
 # 空文字にすると INDEX.md にURL行を出力しない。
 # 注意: 公開サイト側（docs/index.html）にはリポジトリへのリンクを置かない方針。
-SITE_URL = "https://miki0902.github.io/TestT/"
+SITE_URL = "https://miki0902.github.io/arxiv-framework-papers/"
 
 # ---------------------------------------------------------------------------
 # タグ定義（このリポジトリで唯一の正）
