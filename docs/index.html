@@ -280,6 +280,67 @@
 
   .empty { padding: 40px 0; color: var(--ink-faint); text-align: center; }
 
+  section.contact {
+    border-top: 1px solid var(--line);
+    background: var(--panel);
+    padding: 44px 0 40px;
+  }
+
+  .contact .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 12px;
+  }
+
+  .contact h2 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  .contact p {
+    margin: 0 0 20px;
+    max-width: 620px;
+    color: var(--ink-soft);
+  }
+
+  .contact ul {
+    margin: 0 0 22px;
+    padding-left: 1.15em;
+    max-width: 620px;
+    color: var(--ink-soft);
+    font-size: 14px;
+  }
+
+  .contact li { margin-bottom: 4px; }
+
+  .mail-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-size: 14.5px;
+    font-weight: 600;
+  }
+
+  .mail-btn:hover { background: #2f4d68; border-color: #2f4d68; }
+
+  .mail-note { margin-top: 14px; font-size: 12.5px; color: var(--ink-faint); }
+
+  .mail-note code {
+    font-size: 12.5px;
+    background: var(--accent-soft);
+    padding: 1px 6px;
+    border-radius: 3px;
+    color: var(--accent);
+  }
+
   footer.site {
     border-top: 1px solid var(--line);
     padding: 24px 0 50px;
@@ -362,6 +423,21 @@
     </section>
   </div>
 </main>
+
+<section class="contact">
+  <div class="wrap">
+    <div class="eyebrow">Feedback</div>
+    <h2>レビュー・ご要望をお寄せください</h2>
+    <p>このアーカイブは継続的に更新しています。内容へのご指摘や収録のご要望を歓迎します。</p>
+    <ul>
+      <li>収録されていない重要な研究の提案</li>
+      <li>要約・タグ・リンクの誤りや、より適切な記述の提案</li>
+      <li>分類やサイトの使い勝手に関するご意見</li>
+    </ul>
+    <a class="mail-btn" href="mailto:miki.nishikawa09020715@gmail.com?subject=%E3%80%90AI%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E7%A0%94%E7%A9%B6%E3%82%A2%E3%83%BC%E3%82%AB%E3%82%A4%E3%83%96%E3%80%91%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC%E3%83%BB%E3%81%94%E8%A6%81%E6%9C%9B">メールで送る</a>
+    <p class="mail-note">ボタンが動かない場合は <code>miki.nishikawa09020715@gmail.com</code> へ直接お送りください。研究の提案の際は、論文タイトルと arXiv の番号を添えていただけると助かります。</p>
+  </div>
+</section>
 
 <footer class="site">
   <div class="wrap">
